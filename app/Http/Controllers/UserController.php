@@ -14,7 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return response()->json([
+            'message' => 'Liste des utilisateurs',
+            'data' => $users->toArray(),
+        ]);
     }
 
     /**
@@ -41,12 +45,21 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  id de l'utilisateur
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            return response()->json([
+                'message' => 'Retourne l\'utilisateur qui a l\'id '.$id,
+                'data' => $user->toArray(),
+            ]);
+        }else{
+            abort(404,'UtilsiateurNotFound');
+        }
+
     }
 
     /**
