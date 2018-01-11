@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class AddForeignKeyToUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('events')) {
-            Schema::create('events', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('status');
-
-            });
-        }
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('event')->unsigned()->default(1);
+            $table->foreign('event')->references('id')->on('events')->onDelete('cascade');
+        });
     }
 
     /**
@@ -30,7 +26,8 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('events');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

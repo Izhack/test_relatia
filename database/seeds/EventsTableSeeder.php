@@ -12,11 +12,14 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'status' => 'Rec',
+            'status' => "Inserer",
         ]);
 
         DB::table('events')->insert([
-            'status' => 'Insert',
+            'status' => "Recuperer",
         ]);
+
+
+
     }
 }

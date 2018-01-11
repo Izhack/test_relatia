@@ -14,7 +14,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return response()->json([
+            'message' => 'Liste des events',
+            'data' => $events->toArray(),
+        ]);
     }
 
     /**
@@ -81,5 +85,9 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function getStatus($id){
+        return "hey";
     }
 }
